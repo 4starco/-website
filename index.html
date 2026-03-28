@@ -320,7 +320,9 @@ footer{padding:24px 48px;display:flex;justify-content:space-between;align-items:
           <p class="body-copy" style="margin-bottom:28px">Receive the signal. Shape it into something real.
 
               For joint ventures, defined partnerships, or aligned collaboration where genuine shared value exists.</p>
-          <form onsubmit="submitForm(event)">
+          <form action="https://formspree.io/f/xeepekqr" method="POST">
+            <input type="hidden" name="_subject" value="4★Co — New Enquiry">
+            <input type="hidden" name="_next" value="https://4star-website.pages.dev/?sent=true">
             <div class="form-row"><label>Name</label><input type="text" placeholder="Your full name" required></div>
             <div class="form-row"><label>Email</label><input type="email" placeholder="Your email address" required></div>
             <div class="form-row"><label>Nature of Enquiry</label><input type="text" placeholder="Brief description"></div>
@@ -329,8 +331,8 @@ footer{padding:24px 48px;display:flex;justify-content:space-between;align-items:
           </form>
         </div>
         <div style="padding-top:4px">
-          <div class="section-label">Direct</div>
-          <div class="contact-email">mail@4star.co</div>
+          <div class="section-label">Response</div>
+          <p class="body-copy" style="margin-bottom:0">All enquiries are reviewed personally. If there is genuine alignment, you will hear back within a few days.</p>
         </div>
       </div>
     </div>
@@ -366,13 +368,7 @@ function go(id){
 }
 function openMob(){document.getElementById('mobileNav').classList.add('open')}
 function closeMob(){document.getElementById('mobileNav').classList.remove('open')}
-function submitForm(e){
-  e.preventDefault();
-  const btn=e.target.querySelector('.form-btn');
-  btn.textContent='Sent ✓';
-  btn.style.borderColor='var(--gold)';btn.style.color='var(--gold)';
-  setTimeout(()=>{btn.textContent='Send Enquiry';btn.style.borderColor='';btn.style.color='';e.target.reset()},3000);
-}
+// Form handled by Formspree
 </script>
 </body>
 </html>
