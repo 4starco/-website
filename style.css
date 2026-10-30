@@ -30,8 +30,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 
 /* Home hero: his portrait artwork full bleed, words sit on the dark left side */
 .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;isolation:isolate}
-.hero > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 40%;z-index:-2;transform:scale(1.04);animation:settle 2.2s cubic-bezier(.2,.7,.2,1) forwards}
-.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(22,24,26,.92) 0%,rgba(22,24,26,.55) 42%,rgba(22,24,26,0) 70%),linear-gradient(0deg,var(--ground) 0%,rgba(22,24,26,0) 38%)}
+.hero > img{position:absolute;top:0;bottom:0;right:0;left:auto;width:74%;height:100%;object-fit:cover;object-position:30% 35%;z-index:-2;transform:scale(1.04);animation:settle 2.2s cubic-bezier(.2,.7,.2,1) forwards}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,var(--ground) 26%,rgba(22,24,26,.6) 40%,rgba(22,24,26,0) 58%),linear-gradient(0deg,var(--ground) 0%,rgba(22,24,26,0) 38%)}
 @keyframes settle{to{transform:scale(1)}}
 .hero .wrap{width:100%;padding-bottom:clamp(64px,12vh,120px)}
 .tri{display:flex;gap:18px;flex-wrap:wrap;margin:0 0 22px;font-size:1rem;font-weight:500;color:var(--gold)}
@@ -62,7 +62,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 /* Inner page header: banner image with the title over it */
 .banner{position:relative;min-height:72svh;display:flex;align-items:flex-end;overflow:hidden;isolation:isolate}
 .banner > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
-.banner::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,var(--ground) 0%,rgba(22,24,26,.55) 50%,rgba(22,24,26,.25) 100%)}
+.banner::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,var(--ground) 0%,rgba(22,24,26,.5) 50%,rgba(22,24,26,.35) 85%,rgba(22,24,26,.75) 100%)}
 .banner .wrap{width:100%;padding-bottom:56px}
 .banner h1{margin:0;font-weight:600;font-size:clamp(3.6rem,10vw,8rem);line-height:.9;letter-spacing:-.04em}
 .banner .sub{margin:20px 0 0;max-width:36rem;font-family:var(--voice);font-style:italic;font-size:clamp(1.25rem,2.2vw,1.7rem);line-height:1.35}
@@ -149,7 +149,7 @@ footer .mark img{width:22px;opacity:.7}
   .menu{display:none;position:absolute;top:76px;right:24px;flex-direction:column;gap:6px;background:var(--ground-2);border:1px solid var(--line);border-radius:10px;padding:14px 22px;min-width:180px}
   .menu.open{display:flex}
   .hero::after{background:linear-gradient(0deg,var(--ground) 8%,rgba(22,24,26,.6) 55%,rgba(22,24,26,.2) 100%)}
-  .hero > img{object-position:70% 30%}
+  .hero > img{width:100%;object-position:38% 30%}
   .posts{grid-template-columns:1fr}
   .two{grid-template-columns:1fr}
   .strip{grid-template-columns:repeat(5,1fr)}
