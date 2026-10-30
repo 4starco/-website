@@ -36,6 +36,7 @@ body{
   position:fixed;right:-14vmin;bottom:-18vmin;width:78vmin;max-width:none;
   opacity:.045;pointer-events:none;user-select:none;z-index:0;
 }
+.wave{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;display:block}
 .page{
   position:relative;z-index:1;max-width:1080px;margin:0 auto;min-height:100%;
   display:flex;flex-direction:column;gap:clamp(56px,10vh,120px);
@@ -99,6 +100,7 @@ footer{
 </style>
 </head>
 <body>
+<canvas class="wave" aria-hidden="true"></canvas>
 <img class="watermark" src="assets/mark-white.png" alt="" aria-hidden="true">
 <div class="page">
   <header>
@@ -146,6 +148,42 @@ footer{
       })
       .catch(function(){send.disabled=false;note.textContent='That did not send. Please try again.'});
   });
+})();
+</script>
+<script>
+(function(){
+  var c=document.querySelector('.wave'),x=c.getContext('2d'),W,H,D,t=0;
+  var still=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var COLS=26,ROWS=16;
+  function size(){D=Math.min(window.devicePixelRatio||1,2);W=c.clientWidth;H=c.clientHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0);}
+  function pt(i,j){
+    var u=i/(COLS-1),v=j/(ROWS-1);
+    var z=Math.sin(u*5.2+t*0.35)*0.55+Math.sin(v*3.4-t*0.22+u*1.6)*0.45+Math.sin((u+v)*7.0+t*0.5)*0.18;
+    var depth=0.25+v*0.75;
+    var px=W*0.5+(u-0.5)*W*(0.9+depth*1.1);
+    var py=H*0.52+depth*H*0.5+z*H*0.13*depth;
+    return [px,py,depth];
+  }
+  function draw(){
+    x.clearRect(0,0,W,H);
+    var g=[],i,j;
+    for(j=0;j<ROWS;j++){g[j]=[];for(i=0;i<COLS;i++)g[j][i]=pt(i,j);}
+    x.lineWidth=0.7;
+    for(j=0;j<ROWS;j++)for(i=0;i<COLS;i++){
+      var p=g[j][i],a=(0.05+p[2]*0.13).toFixed(3);
+      x.strokeStyle='rgba(243,242,238,'+a+')';
+      x.beginPath();
+      if(i<COLS-1){x.moveTo(p[0],p[1]);x.lineTo(g[j][i+1][0],g[j][i+1][1]);}
+      if(j<ROWS-1){x.moveTo(p[0],p[1]);x.lineTo(g[j+1][i][0],g[j+1][i][1]);}
+      if(i<COLS-1&&j<ROWS-1&&(i+j)%2===0){x.moveTo(p[0],p[1]);x.lineTo(g[j+1][i+1][0],g[j+1][i+1][1]);}
+      x.stroke();
+      x.fillStyle='rgba(243,242,238,'+(0.10+p[2]*0.22).toFixed(3)+')';
+      x.beginPath();x.arc(p[0],p[1],0.6+p[2]*1.1,0,6.283);x.fill();
+    }
+  }
+  function loop(){t+=0.012;draw();requestAnimationFrame(loop);}
+  size();window.addEventListener('resize',function(){size();draw();});
+  if(still){t=2;draw();}else{loop();}
 })();
 </script>
 </body>
